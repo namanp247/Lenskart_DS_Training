@@ -65,19 +65,23 @@ def mk_cost_lines(x,y,w,b, ax):
 
 def plt_intuition(x_train, y_train):
 
-    w_range = np.array([200-200,200+200])
-    tmp_b = 100
+    w_range = np.array([200-200,200+200]) #weight coeff range
+    tmp_b = 100 #bias / intercept
 
     w_array = np.arange(*w_range, 5)
+    #store the cost evaluated for different values of w
     cost = np.zeros_like(w_array)
+    # evaluating cost for different values of weight param
     for i in range(len(w_array)):
         tmp_w = w_array[i]
         cost[i] = compute_cost(x_train, y_train, tmp_w, tmp_b)
 
     @interact(w=(*w_range,10),continuous_update=False)
     def func( w=150):
+        #generate model using vectorization
         f_wb = np.dot(x_train, w) + tmp_b
-
+        
+        #visualtion of the model
         fig, ax = plt.subplots(1, 2, constrained_layout=True, figsize=(8,4))
         fig.canvas.toolbar_position = 'bottom'
 
